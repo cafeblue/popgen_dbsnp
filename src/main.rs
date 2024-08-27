@@ -281,7 +281,7 @@ if args.bin > 0 {
     };
     
 
-    println!("gene:\texon_length:\tbin:\tbinsize:\tpi:\tthetaW:\tTajima's D:\tTajima's D normalized:\tH:\tH Normalized\tE");
+    println!("gene:\tsamplesize:\texon_length:\tbin:\tbinsize:\tpi:\tthetaW:\tTajima's D:\tTajima's D normalized:\tH:\tH Normalized\tE");
     for gene in gene_tmppi.keys() {
         let tmp = gene_tmppi.get(gene).unwrap();
   
@@ -344,7 +344,7 @@ if args.bin > 0 {
             let hache = h_tmp[i] as f64/ ((all_nb[i] as f64 * (all_nb[i] as f64 - 1.0)) / 2.0);
             let final_h = pi - hache;
 
-            let elle = hn_tmp[i] as f64 / (1.0 - all_nb[i] as f64);
+            let elle = hn_tmp[i] as f64 / (all_nb[i] as f64 - 1.0);
             let mut final_hnorm: f64 = 0.0;
             let gun = hnorm(all_nb[i], seg[i], theta);
             if gun > 0.0 {
@@ -358,7 +358,7 @@ if args.bin > 0 {
             }
 
 
-            println!("{}\t{}\t{}\t{}\t{}\t{}\t{}\t{}\t{}\t{}\t{}", gene, totaldet, i, det[i], pi, theta, tajd, tajd/tajd_min, final_h, final_hnorm, final_e);
+            println!("{}\t{}\t{}\t{}\t{}\t{}\t{}\t{}\t{}\t{}\t{}\t{}", gene, all_nb[i], totaldet, i, det[i], pi, theta, tajd, tajd/tajd_min, final_h, final_hnorm, final_e);
         }
     }
 }
